@@ -37,7 +37,7 @@ Create a portfolio-ready BI project that demonstrates:
 - track monthly and annual sales performance over time
 - identify top-performing products and categories
 - understand which customers and territories drive the most revenue
-- analyse seasonal patterns and year-over-year trends
+- analyze seasonal patterns and year-over-year trends
 - compare online vs reseller channel performance
 
 ## Business Questions
