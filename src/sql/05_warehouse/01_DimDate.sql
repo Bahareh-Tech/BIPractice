@@ -1,0 +1,5 @@
+CREATE TABLE DimDate
+(
+    DateKey INT PRIMARY KEY IDENTITY(1,1)
+)
+GO
