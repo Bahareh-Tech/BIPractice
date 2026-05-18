@@ -10,7 +10,9 @@ CREATE TABLE stg_Product
     ProductNumber NVARCHAR(255),
     Color NVARCHAR(50),
     ListPrice DECIMAL(18, 2),
-    ProductSubCategoryID INT
+    ProductSubCategoryID INT,
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -20,7 +22,9 @@ CREATE TABLE stg_ProductSubCategory
 (
     ProductSubcategoryID INT,
     Name NVARCHAR(255),
-    ProductCategoryID INT
+    ProductCategoryID INT,
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -29,7 +33,9 @@ GO
 CREATE TABLE stg_ProductCategory
 (
     ProductCategoryID INT,
-    Name NVARCHAR(255)
+    Name NVARCHAR(255),
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -40,7 +46,9 @@ CREATE TABLE stg_Customer
     CustomerID INT,
     PersonID INT,
     StoreID INT,
-    AccountNumber NVARCHAR(50)
+    AccountNumber NVARCHAR(50),
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -50,7 +58,9 @@ CREATE TABLE stg_Person
 (
     BusinessEntityID INT,
     FirstName NVARCHAR(255),
-    LastName NVARCHAR(255)
+    LastName NVARCHAR(255),
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -59,7 +69,9 @@ GO
 CREATE TABLE stg_Store
 (
     BusinessEntityID INT,
-    Name NVARCHAR(255)
+    Name NVARCHAR(255),
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -70,7 +82,9 @@ CREATE TABLE stg_SalesTerritory
     TerritoryID INT,
     Name NVARCHAR(255),
     CountryRegionCode NVARCHAR(10),
-    TerritoryGroup NVARCHAR(50) -- source column is [Group], renamed to avoid reserved word
+    TerritoryGroup NVARCHAR(50), -- source column is [Group], renamed to avoid reserved word
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -79,7 +93,9 @@ GO
 CREATE TABLE stg_CountryRegion
 (
     CountryRegionCode NVARCHAR(10),
-    Name NVARCHAR(255)
+    Name NVARCHAR(255),
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -93,7 +109,9 @@ CREATE TABLE stg_SalesOrderHeader
     ShipDate DATETIME,
     OnlineOrderFlag BIT,
     CustomerID INT,
-    TerritoryID INT
+    TerritoryID INT,
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
@@ -107,7 +125,9 @@ CREATE TABLE stg_SalesOrderDetail
     OrderQty INT,
     UnitPrice DECIMAL(18, 2),
     UnitPriceDiscount DECIMAL(18, 2),
-    LineTotal DECIMAL(18, 2)
+    LineTotal DECIMAL(18, 2),
+    RowHash   NVARCHAR(64),
+    LoadDate  DATETIME DEFAULT GETDATE()
 )
 GO
 
