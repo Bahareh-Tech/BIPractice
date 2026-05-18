@@ -143,11 +143,11 @@ Detailed tools, steps, and information for each phase:
 **Step-by-Step Process**:
 1. **Design Dimension Tables**
    - Based on business questions, identify dimensions needed:
-     - **DimDate**: Contains all dates for time-series analysis (Year, Month, Quarter, DayOfWeek, IsWeekend)
-     - **DimProduct**: Product attributes (ProductID, ProductName, Category, Subcategory, ListPrice)
-     - **DimCustomer**: Customer attributes (CustomerID, CustomerName, CustomerType, etc.)
-     - **DimTerritory**: Territory information (TerritoryID, TerritoryName, Region, Country)
-     - **DimChannel**: Online/Reseller channel (ChannelID, ChannelName)
+     - **DimDate**: Contains all dates for time-series analysis
+     - **DimProduct**: Product attributes 
+     - **DimCustomer**: Customer attributes
+     - **DimTerritory**: Territory information
+     - **DimChannel**: Online/Reseller channel
      - Additional: DimSalesPerson, DimStore (if analyzing sales rep/reseller performance)
 
 2. **Design Fact Table**
