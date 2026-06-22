@@ -22,11 +22,11 @@ DROP TABLE IF EXISTS DimCustomer
 GO
 CREATE TABLE DimCustomer
 (
-    CustomerKey INT PRIMARY KEY IDENTITY(1,1), -- Surrogate Key
-    CustomerIDBK INT NOT NULL,  -- Business Key
-    CustomerName NVARCHAR(255) NOT NULL,    -- Person full name OR store name
-    CustomerType NVARCHAR(20) NOT NULL, -- 'Individual' or 'Store'
-    AccountNumber NVARCHAR(20) NULL
+    CustomerKey  INT PRIMARY KEY IDENTITY(1,1), -- Surrogate Key
+    CustomerIDBK INT          NOT NULL,         -- Business Key
+    CustomerName NVARCHAR(255) NOT NULL,        -- Person full name OR store name
+    CustomerType NVARCHAR(20) NOT NULL,         -- 'Individual' or 'Store'
+    DimRowHash   NVARCHAR(64) NOT NULL          -- SHA2_256 hash of all attribute columns; used by SCD Check Lookup to detect changes (SCD Type 1)
 )
 GO
 
@@ -36,3 +36,7 @@ GO
 
 SELECT * FROM DimCustomer
 GO
+
+
+
+

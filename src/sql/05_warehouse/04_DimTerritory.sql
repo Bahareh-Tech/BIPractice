@@ -21,11 +21,12 @@ DROP TABLE IF EXISTS DimTerritory
 GO
 CREATE TABLE DimTerritory
 (
-    TerritoryKey    INT PRIMARY KEY IDENTITY(1,1), -- Surrogate Key
-    TerritoryIDBK   INT NOT NULL,   -- Business Key
-    TerritoryName   NVARCHAR(50) NOT NULL,  -- region name via Name
-    TerritoryCountry    NVARCHAR(50) NOT NULL,  -- via CountryRegion.CountryRegionCode + CountryRegion.Name
-    TerritoryGroup  NVARCHAR(50) NOT NULL -- via Group
+    TerritoryKey     INT PRIMARY KEY IDENTITY(1,1), -- Surrogate Key
+    TerritoryIDBK    INT          NOT NULL,          -- Business Key
+    TerritoryName    NVARCHAR(50) NOT NULL,           -- region name via Name
+    TerritoryCountry NVARCHAR(50) NOT NULL,           -- via CountryRegion.CountryRegionCode + CountryRegion.Name
+    TerritoryGroup   NVARCHAR(50) NOT NULL,           -- via Group
+    DimRowHash       NVARCHAR(64) NOT NULL            -- SHA2_256 hash of all attribute columns; used by SCD Check Lookup to detect changes (SCD Type 1)
 )
 GO
 

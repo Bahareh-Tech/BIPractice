@@ -8,6 +8,10 @@ GO
 DROP TABLE IF EXISTS DimDate
 GO
 
+/*
+Create DimDate table with a surrogate key (DateKey) and various date attributes for 
+easy querying and filtering in the data warehouse.
+*/
 CREATE TABLE DimDate
 (
     DateKey INT PRIMARY KEY,   -- YYYYMMDD natural key
@@ -25,22 +29,43 @@ CREATE TABLE DimDate
 )
 GO
 
+-- Populate DimDate with a range of dates (2005-01-01 to 2030-12-31)
+
+DECLARE @StartDate DATE = '2005-01-01';
+DECLARE @EndDate   DATE = '2030-12-31';
+DECLARE @CurrentDate DATE = @StartDate;
+
+WHILE @CurrentDate <= @EndDate
+BEGIN
+    INSERT INTO DimDate (DateKey, [Date], [Year], MonthOfYear, MonthName,
+        DayOfMonth, DayName, DayOfWeek, WeekOfYear,
+        IsWeekend, [Quarter], QuarterName)
+    VALUES (
+        CONVERT(INT, FORMAT(@CurrentDate, 'yyyyMMdd')),
+        @CurrentDate,
+        YEAR(@CurrentDate),
+        MONTH(@CurrentDate),
+        DATENAME(MONTH, @CurrentDate),
+        DAY(@CurrentDate),
+        DATENAME(WEEKDAY, @CurrentDate),
+        DATEPART(WEEKDAY, @CurrentDate),
+        DATEPART(WEEK, @CurrentDate),
+        CASE WHEN DATENAME(WEEKDAY, @CurrentDate) IN ('Saturday', 'Sunday') THEN 1 ELSE 0 END,
+        DATEPART(QUARTER, @CurrentDate),
+        'Q' + CAST(DATEPART(QUARTER, @CurrentDate) AS NVARCHAR(1))
+    );
+
+    SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate);
+END
+GO
+
+-- Verifying the data was inserted correctly
+SELECT 
+    COUNT(*) AS TotalRows, 
+    MIN([Date]) AS MinDate, 
+    MAX([Date]) AS MaxDate 
+FROM DimDate;
+GO
+
 SELECT * FROM DimDate
 GO 
-
-/*
-SELECT 
-    CONVERT(INT, FORMAT([Date], 'yyyyMMdd')) AS DateKey, 
-    YEAR(OrderDate) AS [Year], 
-    MONTH(OrderDate) AS MonthOfYear, -- or DATEPART(MM, OrderDate) AS MonthOfYear
-    DATENAME(MM, OrderDate) AS MonthName,
-    DAY(OrderDate) AS DayOfMonth, -- or DATEPART(DD, OrderDate) AS DayOfMonth
-    DATENAME(DW, OrderDate) AS DayName,
-    DATEPART(DW, OrderDate) AS DayOfWeek,
-    DATEPART(WK, OrderDate) AS WeekOfYear,
-    CASE WHEN DATENAME(DW, OrderDate) IN ('Saturday', 'Sunday') THEN 1 ELSE 0 END AS IsWeekend,
-    DATEPART(QUARTER, OrderDate) AS [Quarter],
-    'Q' + CAST(DATEPART(QUARTER, OrderDate) AS NVARCHAR(1)) AS QuarterName
-FROM Sales.SalesOrderHeader
-GO
-*/

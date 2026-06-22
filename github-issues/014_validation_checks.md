@@ -7,7 +7,7 @@ Validate that warehouse outputs match the source data closely enough for reporti
 Create SQL checks for row counts, totals, and sample comparisons.
 
 ## Deliverables
-- Validation scripts in `src/sql/07_validation/`
+- Validation checks in `src/ssis/validation/`
 - Source vs warehouse checks
 - Basic reconciliation notes
 

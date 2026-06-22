@@ -4,7 +4,7 @@
 Load cleaned data from staging into dimension tables.
 
 ## Description
-Create ETL scripts in `src/sql/06_etl/` to populate dimensions from staging or source logic.
+Create SSIS packages in `src/ssis/etl/` to populate dimensions from staging.
 
 ## Deliverables
 - Load scripts for `DimDate`, `DimProduct`, `DimCustomer`, and `DimTerritory`

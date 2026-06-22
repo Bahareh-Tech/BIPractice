@@ -1,0 +1,2090 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/25/2026 6:36:24 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAHAREH-LAPTOP"
+  DTS:CreatorName="BAHAREH-LAPTOP\Bahareh"
+  DTS:DTSID="{672BB2B8-6FC1-4C63-A5E4-40643D40FF82}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="s3_LoadDimTerritory"
+  DTS:PackageType="5"
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{123E7E0A-BA6F-4C18-B63A-E49251E8F12A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D5D63E87-286C-4BB0-91B3-12ADCA63B031}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Data into DimTerritory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F12FE400-C016-42FE-AB42-2EAB56269F73}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data into DimTerritory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add Columns to stg_error_lookup for CountryRegionCode"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Inputs[Derived Column Input].Columns[CountryRegionCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="CountryRegionCode"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[CountryRegionCode]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="19"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      name="ErrorPackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="38"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      name="ErrorLookupStep"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CountryRegionCode -&gt; CountryRegionName"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CountryRegionCode -&gt; CountryRegionName"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="17"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      name="ErrorFailedKeyName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CountryRegionCode"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CountryRegionCode"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorFailedKeyValue]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorFailedKeyValue]"
+                      name="ErrorFailedKeyValue"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,50)#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[CountryRegionCode]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,50)CountryRegionCode</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input].Columns[CountryRegionName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CountryRegionName"
+                      lineageId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegionName]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input].Columns[TerritoryName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TerritoryName"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryName]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input].Columns[TerritoryGroup]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TerritoryGroup"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryGroup]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[CountryRegionName_Conv]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[CountryRegionName_Conv]"
+                      name="CountryRegionName_Conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegionName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryName_Conv]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryName_Conv]"
+                      name="TerritoryName_Conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryGroup_Conv]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryGroup_Conv]"
+                      name="TerritoryGroup_Conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryGroup]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Data from stg_SalesTerritory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    TerritoryID AS TerritoryIDBK,
+    Name AS TerritoryName,
+    CountryRegionCode,
+    TerritoryGroup,
+    RowHash
+FROM stg_SalesTerritory</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryIDBK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[TerritoryIDBK]"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryIDBK]"
+                      name="TerritoryIDBK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[TerritoryName]"
+                      length="255"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryName]"
+                      name="TerritoryName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryGroup]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[TerritoryGroup]"
+                      length="255"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryGroup]"
+                      name="TerritoryGroup"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[CountryRegionCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[CountryRegionCode]"
+                      length="10"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[CountryRegionCode]"
+                      name="CountryRegionCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[RowHash]"
+                      length="64"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]"
+                      name="RowHash"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[TerritoryIDBK]"
+                      dataType="i4"
+                      name="TerritoryIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[TerritoryName]"
+                      dataType="wstr"
+                      length="255"
+                      name="TerritoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[TerritoryGroup]"
+                      dataType="wstr"
+                      length="255"
+                      name="TerritoryGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[CountryRegionCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="CountryRegionCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].ExternalColumns[RowHash]"
+                      dataType="wstr"
+                      length="64"
+                      name="RowHash" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[TerritoryIDBK]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[TerritoryIDBK]"
+                      name="TerritoryIDBK" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[TerritoryName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[TerritoryName]"
+                      name="TerritoryName" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[CountryRegionCode]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[CountryRegionCode]"
+                      name="CountryRegionCode" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[TerritoryGroup]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[TerritoryGroup]"
+                      name="TerritoryGroup" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[RowHash]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[RowHash]"
+                      name="RowHash" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Insert into DimTerritory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimTerritory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimTerritory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryIDBK]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryIDBK"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryIDBK]"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryIDBK]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].Columns[CountryRegionName_Conv]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CountryRegionName_Conv"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryCountry]"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[CountryRegionName_Conv]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryGroup_Conv]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryGroup_Conv"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryGroup]"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryGroup_Conv]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryName_Conv]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryName_Conv"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryName]"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryName_Conv]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].Columns[RowHash]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="RowHash"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[DimRowHash]"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryKey]"
+                      dataType="i4"
+                      name="TerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryIDBK]"
+                      dataType="i4"
+                      name="TerritoryIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryName]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryCountry]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryGroup]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input].ExternalColumns[DimRowHash]"
+                      dataType="wstr"
+                      length="64"
+                      name="DimRowHash" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Insert into DimTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Insert into DimTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Insert into DimTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load Error Data into stg_error_lookup"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_errors_Lookup]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].Columns[ErrorPackageName]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="ErrorPackageName"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorPackageName]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].Columns[ErrorLookupStep]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="ErrorLookupStep"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorLookupStep]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].Columns[ErrorFailedKeyName]"
+                      cachedDataType="wstr"
+                      cachedLength="17"
+                      cachedName="ErrorFailedKeyName"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].Columns[ErrorFailedKeyValue]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ErrorFailedKeyValue"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      lineageId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output].Columns[ErrorFailedKeyValue]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[ErrorID]"
+                      dataType="i4"
+                      name="ErrorID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PackageName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      dataType="wstr"
+                      length="100"
+                      name="LookupStep" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FailedKeyName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      dataType="i4"
+                      name="FailedKeyValue" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup CountryRegionName in stg_CountryRegion"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    CountryRegionCode,
+    Name AS CountryRegionName
+FROM stg_CountryRegion</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT 
+    CountryRegionCode,
+    Name AS CountryRegionName
+FROM stg_CountryRegion) [refTable]
+where [refTable].[CountryRegionCode] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CountryRegionCode" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CountryRegionName" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[CountryRegionCode]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Inputs[Lookup Input].Columns[CountryRegionCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="CountryRegionCode"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[CountryRegionCode]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CountryRegionCode</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegionName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="255"
+                      lineageId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Match Output].Columns[CountryRegionName]"
+                      name="CountryRegionName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CountryRegionName</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\No Change to DimTerritory"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="No Change to DimTerritory">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\No Change to DimTerritory.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\No Change to DimTerritory.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load Data into DimTerritory\No Change to DimTerritory.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="SCD Check Lookup in DimTerritory"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimTerritory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimTerritory]) [refTable]
+where [refTable].[TerritoryIDBK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="TerritoryKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryIDBK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryCountry" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryGroup" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DimRowHash" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryIDBK]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Inputs[Lookup Input].Columns[TerritoryIDBK]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryIDBK"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[TerritoryIDBK]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TerritoryIDBK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryName]"
+                      name="TerritoryName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritoryName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryCountry]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryCountry]"
+                      name="TerritoryCountry"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritoryCountry</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryGroup]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryGroup]"
+                      name="TerritoryGroup"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritoryGroup</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[DimRowHash]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="64"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[DimRowHash]"
+                      name="DimRowHash"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DimRowHash</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryKey]"
+                      name="TerritoryKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritoryKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Update DimTerritory"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Update DimTerritory"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE DimTerritory
+SET
+    TerritoryName = ?,
+    TerritoryCountry = ?,
+    TerritoryGroup = ?,
+    DimRowHash = ?
+WHERE TerritoryKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into DimTerritory\Update DimTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].Columns[TerritoryName_Conv]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryName_Conv"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryName_Conv]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].Columns[CountryRegionName_Conv]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CountryRegionName_Conv"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[CountryRegionName_Conv]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].Columns[TerritoryGroup_Conv]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryGroup_Conv"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output].Columns[TerritoryGroup_Conv]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].Columns[RowHash]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="RowHash"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].Columns[TerritoryKey]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryKey"
+                      externalMetadataColumnId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[TerritoryKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="64"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Update DimTerritory.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Update DimTerritory.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Update DimTerritory.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Update DimTerritory.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Update DimTerritory.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Update or No change to DimTerritory"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input].Columns[RowHash]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="RowHash"
+                      lineageId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]" />
+                    <inputColumn
+                      refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input].Columns[DimRowHash]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="DimRowHash"
+                      lineageId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[DimRowHash]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Update]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Update"
+                  synchronousInputId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]} != #{Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[DimRowHash]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">RowHash != DimRowHash</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[No Change]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="No Change"
+                  synchronousInputId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output].Columns[RowHash]} == #{Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output].Columns[DimRowHash]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">RowHash == DimRowHash</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Data Conversion Output]"
+              endId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\Load Data into DimTerritory\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Derived Column Output]"
+              endId="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Lookup Match Output]"
+              endId="Package\Load Data into DimTerritory\Data Conversion.Inputs[Data Conversion Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Lookup Match Output1]"
+              endId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Lookup No Match Output]"
+              endId="Package\Load Data into DimTerritory\Insert into DimTerritory.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Lookup No Match Output1]"
+              endId="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[No Change]"
+              endId="Package\Load Data into DimTerritory\No Change to DimTerritory.Inputs[Row Count Input 1]"
+              name="No Change"
+              startId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[No Change]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[OLE DB Source Output]"
+              endId="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Load Data into DimTerritory.Paths[Update]"
+              endId="Package\Load Data into DimTerritory\Update DimTerritory.Inputs[OLE DB Command Input]"
+              name="Update"
+              startId="Package\Load Data into DimTerritory\Update or No change to DimTerritory.Outputs[Update]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\Load Data into DimTerritory"
+          TopLeft="227.500000383174,74.4999999658146" />
+        <AnnotationLayout
+          Text="Package: s3_LoadDimTerritory&#xA;Purpose: Load DimTerritory with SCD Type 1 (INSERT new, UPDATE changed).&#xA;Grain: One row per territory (BusinessKey = TerritoryID).&#xA;Dependency: S1_LoadStaging_SalesTerritory + S1_LoadStaging_CountryRegion must run first."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="519.2,88"
+          Id="a1b2c3d4-1001-1002-1003-300000000001"
+          TopLeft="41.2857142841937,174.058823617891" />
+        <AnnotationLayout
+          Text="Data Flow: CountryRegion Lookup -&gt; Data Conversion&#xA;-&gt; SCD Check -&gt; Conditional Split -&gt; INSERT new / UPDATE changed."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="369.6,72"
+          Id="a1b2c3d4-1001-1002-1003-300000000003"
+          TopLeft="441.285714284194,59.0588236178906" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Data into DimTerritory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Load Data into DimTerritory\Update DimTerritory"
+          TopLeft="6.42857144225624,531.47058781502" />
+        <NodeLayout
+          Size="316.8,41.6"
+          Id="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion"
+          TopLeft="28.153061272712,122.936974686978" />
+        <NodeLayout
+          Size="204.8,41.6"
+          Id="Package\Load Data into DimTerritory\No Change to DimTerritory"
+          TopLeft="205.816326968741,531.289075232576" />
+        <NodeLayout
+          Size="257.6,41.6"
+          Id="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup"
+          TopLeft="307.142857796684,301.840335869879" />
+        <NodeLayout
+          Size="253.6,41.6"
+          Id="Package\Load Data into DimTerritory\Update or No change to DimTerritory"
+          TopLeft="12.2448979852494,430.201680295181" />
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory"
+          TopLeft="74.3775511670301,28.0042016609466" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Load Data into DimTerritory\Data Conversion"
+          TopLeft="53.4693878689239,228.100840136195" />
+        <NodeLayout
+          Size="348.8,41.6"
+          Id="Package\Load Data into DimTerritory\Add Columns to stg_error_lookup for CountryRegionCode"
+          TopLeft="253.163265845041,230.504201478627" />
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Load Data into DimTerritory\Insert into DimTerritory"
+          TopLeft="315.306123120183,431.310924026749" />
+        <NodeLayout
+          Size="240.8,41.6"
+          Id="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory"
+          TopLeft="17.1428571793494,306.428571159975" />
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Update]"
+          TopLeft="95.8700680470861,471.801680295181">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.6689075198386"
+              Start="0,0"
+              End="0,52.1689075198386">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.1689075198386" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-16.28029296875,20.2797662599193,32.5605859375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[OLE DB Source Output]"
+          TopLeft="188.865306219871,69.6042016609466">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.3327730260316"
+              Start="0,0"
+              End="0,45.8327730260316">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.8327730260316" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[No Change]"
+          TopLeft="179.978231318583,471.801680295181">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="128.238095650158,59.4873949373948"
+              Start="0,0"
+              End="128.238095650158,51.9873949373948">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.0187350092052" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.0187350092052"
+                    Point2="0,24.0187350092052"
+                    Point3="4,24.0187350092052" />
+                  <mssgle:LineSegment
+                    End="124.238095650158,24.0187350092052" />
+                  <mssgle:CubicBezierSegment
+                    Point1="124.238095650158,24.0187350092052"
+                    Point2="128.238095650158,24.0187350092052"
+                    Point3="128.238095650158,28.0187350092052" />
+                  <mssgle:LineSegment
+                    End="128.238095650158,51.9873949373948" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="39.3977001688292,29.0187350092052,49.4426953125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Lookup No Match Output1]"
+          TopLeft="238.019727939379,164.536974686978">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="189.543537905662,65.9672267916484"
+              Start="0,0"
+              End="189.543537905662,58.4672267916484">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5857868778402" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5857868778402"
+                    Point2="0,26.5857868778402"
+                    Point3="4,26.5857868778402" />
+                  <mssgle:LineSegment
+                    End="185.543537905662,26.5857868778402" />
+                  <mssgle:CubicBezierSegment
+                    Point1="185.543537905662,26.5857868778402"
+                    Point2="189.543537905662,26.5857868778402"
+                    Point3="189.543537905662,30.5857868778402" />
+                  <mssgle:LineSegment
+                    End="189.543537905662,58.4672267916484" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="38.9653822340812,31.5857868778402,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Lookup No Match Output]"
+          TopLeft="176.342857179349,348.028571159975">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="233.763265940834,83.2823528667735"
+              Start="0,0"
+              End="233.763265940834,75.7823528667735">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.6427722471719" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.6427722471719"
+                    Point2="0,33.6427722471719"
+                    Point3="4,33.6427722471719" />
+                  <mssgle:LineSegment
+                    End="229.763265940834,33.6427722471719" />
+                  <mssgle:CubicBezierSegment
+                    Point1="229.763265940834,33.6427722471719"
+                    Point2="233.763265940834,33.6427722471719"
+                    Point3="233.763265940834,37.6427722471719" />
+                  <mssgle:LineSegment
+                    End="233.763265940834,75.7823528667735" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="61.075246251667,38.6427722471719,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Lookup Match Output1]"
+          TopLeft="98.7428571793494,348.028571159975">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.3020408058999,82.1731091352057"
+              Start="0,0"
+              End="40.3020408058999,74.6731091352057">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.1946817100633" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.1946817100633"
+                    Point2="0,33.1946817100633"
+                    Point3="4,33.1946817100633" />
+                  <mssgle:LineSegment
+                    End="36.3020408058999,33.1946817100633" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.3020408058999,33.1946817100633"
+                    Point2="40.3020408058999,33.1946817100633"
+                    Point3="40.3020408058999,37.1946817100633" />
+                  <mssgle:LineSegment
+                    End="40.3020408058999,74.6731091352057" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.0403663158,38.1946817100633,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Lookup Match Output]"
+          TopLeft="133.077891237485,164.536974686978">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.5638654492169"
+              Start="0,0"
+              End="0,56.0638654492169">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.0638654492169" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,22.2272452246084,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Derived Column Output]"
+          TopLeft="427.563265845041,272.104201478627">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.37959195164268,29.7361343912524"
+              Start="0,0"
+              End="8.37959195164268,22.2361343912524">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.8680671956262" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.8680671956262"
+                    Point2="0,14.8680671956262"
+                    Point3="4,14.8680671956262" />
+                  <mssgle:LineSegment
+                    End="4.37959195164268,14.8680671956262" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.37959195164268,14.8680671956262"
+                    Point2="8.37959195164268,14.8680671956262"
+                    Point3="8.37959195164268,18.8680671956262" />
+                  <mssgle:LineSegment
+                    End="8.37959195164268,22.2361343912524" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into DimTerritory.Paths[Data Conversion Output]"
+          TopLeft="134.306122524137,269.700840136195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.7277310237802"
+              Start="0,0"
+              End="0,29.2277310237802">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.2277310237802" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Source: AdventureWorks_Staging.stg_SalesTerritory&#xA;Reads: TerritoryID, Name, CountryRegionCode, Group, RowHash."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="368,56"
+          Id="a1b2c3d4-1001-1002-1003-300000000004"
+          TopLeft="620.476189838583,18.9803921577565" />
+        <AnnotationLayout
+          Text="Lookup: stg_CountryRegion (on CountryRegionCode -&gt; CountryName)&#xA;Match: returns CountryName used as DimTerritory.TerritoryCountry.&#xA;No Match: CountryRegionCode logged to stg_errors_Lookup."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="430.4,72"
+          Id="a1b2c3d4-1001-1002-1003-300000000005"
+          TopLeft="620.476189838583,98.9803921577565" />
+        <AnnotationLayout
+          Text="Data Conversion: Narrows stg_SalesTerritory NVARCHAR(255) columns&#xA;to warehouse NVARCHAR(50) for TerritoryName, TerritoryCountry, TerritoryGroup."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="430.4,72"
+          Id="a1b2c3d4-1001-1002-1003-300000000006"
+          TopLeft="620.476189838583,193.980392157757" />
+        <AnnotationLayout
+          Text="SCD Check Lookup: SELECT TerritoryIDBK, TerritoryKey, DimRowHash FROM DimTerritory&#xA;Match (territory exists) -&gt; Conditional Split for SCD Type 1 check.&#xA;No Match (new territory) -&gt; INSERT into DimTerritory."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="430.4,88"
+          Id="a1b2c3d4-1001-1002-1003-300000000007"
+          TopLeft="620.476189838583,280.980392157756" />
+        <AnnotationLayout
+          Text="Conditional Split (SCD Type 1):&#xA;RowHash != DimRowHash -&gt; changed -&gt; OLE DB Command (UPDATE).&#xA;RowHash == DimRowHash -&gt; no change -&gt; Row Count (discard)."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="430.4,72"
+          Id="a1b2c3d4-1001-1002-1003-300000000008"
+          TopLeft="620.476189838583,364.980392157756" />
+        <AnnotationLayout
+          Text="INSERT: New territory row (No Match from SCD Lookup).&#xA;Maps TerritoryIDBK, TerritoryName, TerritoryCountry, TerritoryGroup, RowHash-&gt;DimRowHash."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="430.4,72"
+          Id="a1b2c3d4-1001-1002-1003-300000000009"
+          TopLeft="620.476189838583,438.980392157756" />
+        <AnnotationLayout
+          Text="OLE DB Command: UPDATE DimTerritory SET TerritoryName=?, TerritoryCountry=?,&#xA;TerritoryGroup=?, DimRowHash=? WHERE TerritoryKey=? (surrogate key, last parameter)."
+          ParentId="Package\Load Data into DimTerritory"
+          FontInfo="{assembly:Null}"
+          Size="430.4,88"
+          Id="a1b2c3d4-1001-1002-1003-300000000010"
+          TopLeft="620.476189838583,506.980392157756" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into DimTerritory\Lookup CountryRegionName in stg_CountryRegion">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into DimTerritory\Load Error Data into stg_error_lookup">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into DimTerritory\Get Data from stg_SalesTerritory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into DimTerritory\Insert into DimTerritory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into DimTerritory\SCD Check Lookup in DimTerritory">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimTerritory]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

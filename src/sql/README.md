@@ -8,8 +8,8 @@ This folder contains SQL scripts organized by project phase.
 - `03_views_procedures/` - reusable views and stored procedures
 - `04_staging/` - staging tables and staging loads
 - `05_warehouse/` - warehouse DDL scripts for dimensions and facts
-- `06_etl/` - ETL load scripts
-- `07_validation/` - reconciliation and validation queries
+
+> **ETL and Validation** are implemented in SSIS — see [`src/ssis/`](../ssis/README.md).
 
 ## Guidance
 Keep scripts small, named clearly, and easy to rerun.

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2026 5:06:02 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAHAREH-LAPTOP"
+  DTS:CreatorName="BAHAREH-LAPTOP\Bahareh"
+  DTS:DTSID="{27EAE5C4-23D6-4F3C-BD4F-A04EBF90B925}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="S2_CleanStaging_SalesOrder"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{BD82E12F-D831-4E93-B9AB-A19730B32BA1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC73B985-D4DF-44CE-9A2C-DD9C7DE78D9F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StageTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">stg_SalesOrderHeader</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Log valid and invalid row counts in stg_ETL_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{97B2E138-4B66-4CE5-AD33-0CA46F228557}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log valid and invalid row counts in stg_ETL_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO stg_ETL_log (PackageName, StageTableName, ValidRows, ErrorRows, LoadDate)&#xA;VALUES (?, 'stg_SalesOrderHeader',&#xA;    (SELECT COUNT(*) FROM stg_SalesOrderHeader),&#xA;    (SELECT COUNT(*) FROM stg_SalesOrderHeader_Error),&#xA;    GETDATE());&#xA;&#xA;INSERT INTO stg_ETL_log (PackageName, StageTableName, ValidRows, ErrorRows, LoadDate)&#xA;VALUES (?, 'stg_SalesOrderDetail',&#xA;    (SELECT COUNT(*) FROM stg_SalesOrderDetail),&#xA;    (SELECT COUNT(*) FROM stg_SalesOrderDetail_Error),&#xA;    GETDATE());" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::StageTableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderDetail"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{76dcdd44-1f23-4d2e-ad7a-d710da3b30b0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderDetail"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO stg_SalesOrderDetail_Error (SalesOrderID, SalesOrderDetailID, ProductID, OrderQty, UnitPrice, LineTotal, ErrorReason, LoadDate)&#xA;SELECT&#xA;    SalesOrderID, &#xA;    SalesOrderDetailID, &#xA;    ProductID, &#xA;    OrderQty, &#xA;    UnitPrice,&#xA;    LineTotal,&#xA;    'Invalid Data',&#xA;    GETDATE()&#xA;FROM stg_SalesOrderDetail&#xA;WHERE SalesOrderDetailID IS NULL&#xA;    OR SalesOrderID IS NULL&#xA;    OR ProductID IS NULL&#xA;    OR OrderQty IS NULL OR OrderQty &lt;= 0&#xA;    OR UnitPrice IS NULL OR UnitPrice &lt; 0&#xA;    OR UnitPriceDiscount IS NULL&#xA;    OR LineTotal IS NULL OR LineTotal &lt; 0;&#xA;&#xA;DELETE FROM stg_SalesOrderDetail&#xA;WHERE SalesOrderDetailID IS NULL&#xA;    OR SalesOrderID IS NULL&#xA;    OR ProductID IS NULL&#xA;    OR OrderQty IS NULL OR OrderQty &lt;= 0&#xA;    OR UnitPrice IS NULL OR UnitPrice &lt; 0&#xA;    OR UnitPriceDiscount IS NULL&#xA;    OR LineTotal IS NULL OR LineTotal &lt; 0;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderHeader"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FE182953-0B59-4409-A8BD-1432E1326013}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderHeader"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO stg_SalesOrderHeader_Error (SalesOrderID, OrderDate, DueDate, ShipDate, OnlineOrderFlag, CustomerID, TerritoryID, ErrorReason, LoadDate)&#xA;SELECT&#xA;    SalesOrderID,&#xA;    OrderDate,&#xA;    DueDate,&#xA;    ShipDate,&#xA;    OnlineOrderFlag,&#xA;    CustomerID,&#xA;    TerritoryID,&#xA;    'Invalid data', &#xA;    GETDATE()&#xA;FROM stg_SalesOrderHeader&#xA;WHERE SalesOrderID IS NULL&#xA;    OR OrderDate IS NULL&#xA;    OR CustomerID IS NULL&#xA;    OR TerritoryID IS NULL&#xA;    OR OnlineOrderFlag IS NULL&#xA;    OR ShipDate &lt; OrderDate&#xA;    OR OrderDate &lt; '2000-01-01'&#xA;    OR OrderDate &gt; GETDATE();&#xA;&#xA;DELETE FROM stg_SalesOrderHeader&#xA;WHERE SalesOrderID IS NULL&#xA;    OR OrderDate IS NULL&#xA;    OR CustomerID IS NULL&#xA;    OR TerritoryID IS NULL&#xA;    OR OnlineOrderFlag IS NULL&#xA;    OR ShipDate &lt; OrderDate&#xA;    OR OrderDate &lt; '2000-01-01'&#xA;    OR OrderDate &gt; GETDATE();" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Remove orphan Detail rows whose had invalid Header parent"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EC77D405-0C2D-4C11-BBCF-2A7034D7869F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Remove orphan Detail rows whose had invalid Header parent"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO stg_SalesOrderDetail_Error (SalesOrderID, SalesOrderDetailID, ProductID, OrderQty, UnitPrice, LineTotal, ErrorReason, LoadDate)&#xA;SELECT&#xA;    d.SalesOrderID,&#xA;    d.SalesOrderDetailID,&#xA;    d.ProductID,&#xA;    d.OrderQty,&#xA;    d.UnitPrice,&#xA;    d.LineTotal,&#xA;    'Orphan: SalesOrderID not found in stg_SalesOrderHeader',&#xA;    GETDATE()&#xA;FROM stg_SalesOrderDetail d&#xA;WHERE NOT EXISTS (&#xA;    SELECT 1 FROM stg_SalesOrderHeader h&#xA;    WHERE h.SalesOrderID = d.SalesOrderID&#xA;);&#xA;&#xA;DELETE FROM stg_SalesOrderDetail&#xA;WHERE NOT EXISTS (&#xA;    SELECT 1 FROM stg_SalesOrderHeader h&#xA;    WHERE h.SalesOrderID = stg_SalesOrderDetail.SalesOrderID&#xA;);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4D4A8BC3-3A1C-4F1D-8E6A-95C22E5C7745}"
+      DTS:From="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderHeader"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderDetail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B71B31CE-9E6F-4677-81BA-0FE9E346E65B}"
+      DTS:From="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderDetail"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Remove orphan Detail rows whose had invalid Header parent" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{FDC0C72E-B7F8-406A-B1EB-35BAAED882A5}"
+      DTS:From="Package\Remove orphan Detail rows whose had invalid Header parent"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Log valid and invalid row counts in stg_ETL_log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="302.4,41.6"
+          Id="Package\Log valid and invalid row counts in stg_ETL_log"
+          TopLeft="91.9285716125549,359.876470283922" />
+        <NodeLayout
+          Size="399.2,41.6"
+          Id="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderDetail"
+          TopLeft="37.8571429377305,176.199999851865" />
+        <NodeLayout
+          Size="406.4,41.6"
+          Id="Package\Remove invalid rows &amp; Fix formatting issues in stg_SalesOrderHeader"
+          TopLeft="34.0714285683874,93.1705881910547" />
+        <NodeLayout
+          Size="367.2,41.6"
+          Id="Package\Remove orphan Detail rows whose had invalid Header parent"
+          TopLeft="59.0714286854685,255.455189712405" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="237.364285753059,134.770588191055">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.4294116608102"
+              Start="0,0"
+              End="0,33.9294116608102">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.9294116608102" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="240.0642858116,217.799999851865">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.6551898605402"
+              Start="0,0"
+              End="0,30.1551898605402">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.1551898605402" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="242.900000149012,297.055189712405">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62.821280571517"
+              Start="0,0"
+              End="0,55.321280571517">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.321280571517" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Stage 2 - Clean stg_SalesOrderHeader and stg_SalesOrderDetail&#xD;&#xA;Both tables are cleaned in one package because Detail depends on Header:&#xD;&#xA;  stg_SalesOrderDetail.SalesOrderID → stg_SalesOrderHeader.SalesOrderID&#xD;&#xA;Header must be cleaned first. After Header cleaning, any Detail rows&#xD;&#xA;whose SalesOrderID no longer exists in Header are orphans and must also&#xD;&#xA;be removed — otherwise Stage 3 JOIN silently drops them with no audit trail."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="436.8,120"
+          Id="d0509abf-0aef-4b00-8a27-e53d9822ccfa"
+          TopLeft="30.7142857796684,437.0705878606" />
+        <AnnotationLayout
+          Text="Cleans both sales order tables in dependency order.&#xD;&#xA;&#xD;&#xA;Step 1 - Header:&#xD;&#xA;  Removes rows with NULL keys (SalesOrderID, OrderDate, CustomerID,&#xD;&#xA;  TerritoryID, OnlineOrderFlag) and date logic errors (ShipDate &lt; OrderDate,&#xD;&#xA;  out-of-range OrderDate). Rejected rows → stg_SalesOrderHeader_Error.&#xD;&#xA;&#xD;&#xA;Step 2 - Detail:&#xD;&#xA;  Removes rows with NULL keys or invalid numeric values (OrderQty &lt;= 0,&#xD;&#xA;  UnitPrice &lt; 0, NULL discount/total). Rejected rows → stg_SalesOrderDetail_Error.&#xD;&#xA;&#xD;&#xA;Step 3 - Orphan cleanup:&#xD;&#xA;  Removes Detail rows whose SalesOrderID no longer exists in Header&#xD;&#xA;  after Step 1. Rejected rows → stg_SalesOrderDetail_Error with&#xD;&#xA;  reason 'Orphan: SalesOrderID not found in stg_SalesOrderHeader'.&#xD;&#xA;  No trimming needed — no string columns in either table."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="458.4,279.2"
+          Id="4702aae7-53e4-4623-9abd-3f5851ae2aca"
+          TopLeft="456.428572400188,39.9882353242809" />
+        <AnnotationLayout
+          Text="Logs two separate records to stg_ETL_log:&#xD;&#xA;  Row 1: stg_SalesOrderHeader — valid vs. error row counts&#xD;&#xA;  Row 2: stg_SalesOrderDetail — valid vs. error row counts&#xD;&#xA;  (including orphans in the error count for Detail)"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="341.6,88"
+          Id="a77124fa-37ca-4d1c-8a66-b70862a53dfc"
+          TopLeft="456.000000638622,330.599999715125" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

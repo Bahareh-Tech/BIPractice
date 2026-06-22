@@ -1,0 +1,2641 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/26/2026 2:29:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAHAREH-LAPTOP"
+  DTS:CreatorName="BAHAREH-LAPTOP\Bahareh"
+  DTS:DTSID="{DAFD08BD-E027-40A4-9ED9-DC8F02BCDBFB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="s3_LoadFactSales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{27B290B7-EF5B-4B13-85C2-0DAC834331E0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Data into FactSales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F8FEC8F2-B5BF-4746-B67A-49C258AAEB70}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data into FactSales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add Columns to stg_error_lookup for CustomerID"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="16"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      name="ErrorPackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      name="ErrorLookupStep"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CustomerID -&gt; CustomerKey"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CustomerID -&gt; CustomerKey"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      name="ErrorFailedKeyName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CustomerID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CustomerID"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add Columns to stg_error_lookup for ProductID"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="16"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      name="ErrorPackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="23"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      name="ErrorLookupStep"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"ProductID -&gt; ProductKey"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"ProductID -&gt; ProductKey"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      name="ErrorFailedKeyName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"ProductID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"ProductID"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add Columns to stg_error_lookup for TerritoryID"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="16"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorPackageName]"
+                      name="ErrorPackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="27"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorLookupStep]"
+                      name="ErrorLookupStep"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"TerritoryID -&gt; TerritoryKey"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"TerritoryID -&gt; TerritoryKey"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]"
+                      name="ErrorFailedKeyName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"TerritoryID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"TerritoryID"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Add DateKey, ChannelKey"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add DateKey, ChannelKey"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Inputs[Derived Column Input].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Inputs[Derived Column Input].Columns[OnlineOrderFlag]"
+                      cachedDataType="bool"
+                      cachedName="OnlineOrderFlag"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)([YEAR](#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderDate]}) * 10000 + [MONTH](#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderDate]}) * 100 + [DAY](#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderDate]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(YEAR(OrderDate) * 10000 + MONTH(OrderDate) * 100 + DAY(OrderDate))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output].Columns[ChannelKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output].Columns[ChannelKey]"
+                      name="ChannelKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]} ==  TRUE  ? 2 : 1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">OnlineOrderFlag ==  TRUE  ? 2 : 1</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Insert Data into FactSales"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Data into FactSales"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Insert Data into FactSales.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[SalesOrderIDBK]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderIDBK"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderIDBK]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[SalesOrderIDBK]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[SalesOrderDetailIDBK]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderDetailIDBK"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderDetailIDBK]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[SalesOrderDetailIDBK]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[OrderQty]"
+                      cachedDataType="i2"
+                      cachedName="OrderQty"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderQty]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[UnitPriceDiscount]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceDiscount"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[UnitPriceDiscount]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[UnitPriceDiscount]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[LineTotal]"
+                      cachedDataType="numeric"
+                      cachedName="LineTotal"
+                      cachedPrecision="18"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[LineTotal]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[LineTotal]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[ChannelKey]"
+                      cachedDataType="i4"
+                      cachedName="ChannelKey"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[ChannelKey]"
+                      lineageId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output].Columns[ChannelKey]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Match Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].Columns[TerritoryKey]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryKey"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryKey]"
+                      lineageId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Match Output].Columns[TerritoryKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[SalesKey]"
+                      dataType="i4"
+                      name="SalesKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderIDBK]"
+                      dataType="i4"
+                      name="SalesOrderIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderDetailIDBK]"
+                      dataType="i4"
+                      name="SalesOrderDetailIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryKey]"
+                      dataType="i4"
+                      name="TerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[ChannelKey]"
+                      dataType="i4"
+                      name="ChannelKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                      dataType="i4"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="numeric"
+                      name="UnitPrice"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[UnitPriceDiscount]"
+                      dataType="numeric"
+                      name="UnitPriceDiscount"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input].ExternalColumns[LineTotal]"
+                      dataType="numeric"
+                      name="LineTotal"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Insert Data into FactSales.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into FactSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into FactSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into FactSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Data into stg_error_lookup for CustomerID"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_errors_Lookup]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].Columns[ErrorPackageName]"
+                      cachedDataType="wstr"
+                      cachedLength="16"
+                      cachedName="ErrorPackageName"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorPackageName]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].Columns[ErrorLookupStep]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="ErrorLookupStep"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorLookupStep]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].Columns[ErrorFailedKeyName]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ErrorFailedKeyName"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[CustomerID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[ErrorID]"
+                      dataType="i4"
+                      name="ErrorID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PackageName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      dataType="wstr"
+                      length="100"
+                      name="LookupStep" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FailedKeyName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      dataType="i4"
+                      name="FailedKeyValue" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Data into stg_error_lookup for ProductID"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_errors_Lookup]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].Columns[ErrorPackageName]"
+                      cachedDataType="wstr"
+                      cachedLength="16"
+                      cachedName="ErrorPackageName"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorPackageName]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].Columns[ErrorLookupStep]"
+                      cachedDataType="wstr"
+                      cachedLength="23"
+                      cachedName="ErrorLookupStep"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorLookupStep]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].Columns[ErrorFailedKeyName]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="ErrorFailedKeyName"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[ProductID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[ErrorID]"
+                      dataType="i4"
+                      name="ErrorID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PackageName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      dataType="wstr"
+                      length="100"
+                      name="LookupStep" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FailedKeyName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      dataType="i4"
+                      name="FailedKeyValue" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Data into stg_error_lookup for TerritoryID"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_errors_Lookup]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].Columns[ErrorPackageName]"
+                      cachedDataType="wstr"
+                      cachedLength="16"
+                      cachedName="ErrorPackageName"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorPackageName]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].Columns[ErrorLookupStep]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ErrorLookupStep"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorLookupStep]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].Columns[ErrorFailedKeyName]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="ErrorFailedKeyName"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      lineageId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output].Columns[ErrorFailedKeyName]" />
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[TerritoryID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[ErrorID]"
+                      dataType="i4"
+                      name="ErrorID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PackageName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[LookupStep]"
+                      dataType="wstr"
+                      length="100"
+                      name="LookupStep" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FailedKeyName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[FailedKeyValue]"
+                      dataType="i4"
+                      name="FailedKeyValue" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    SH.SalesOrderID AS SalesOrderIDBK,
+    SD.SalesOrderDetailID AS SalesOrderDetailIDBK,
+    SD.ProductID,
+    SH.CustomerID,
+    SH.TerritoryID,
+    SH.OrderDate,
+    SH.OnlineOrderFlag,
+    SD.OrderQty,
+    SD.UnitPrice,
+    SD.UnitPriceDiscount,
+    SD.LineTotal
+FROM stg_SalesOrderHeader AS SH
+LEFT JOIN stg_SalesOrderDetail AS SD
+    ON SH.SalesOrderID = SD.SalesOrderID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[SalesOrderIDBK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderIDBK]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[SalesOrderIDBK]"
+                      name="SalesOrderIDBK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[SalesOrderDetailIDBK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderDetailIDBK]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[SalesOrderDetailIDBK]"
+                      name="SalesOrderDetailIDBK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderQty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[OrderQty]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderQty]"
+                      name="OrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[UnitPriceDiscount]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[LineTotal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[LineTotal]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[LineTotal]"
+                      name="LineTotal"
+                      precision="18"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                      name="OrderDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[OnlineOrderFlag]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]"
+                      name="OnlineOrderFlag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[ProductID]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      name="TerritoryID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderIDBK]"
+                      dataType="i4"
+                      name="SalesOrderIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderDetailIDBK]"
+                      dataType="i4"
+                      name="SalesOrderDetailIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[OrderQty]"
+                      dataType="i2"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[UnitPriceDiscount]"
+                      dataType="cy"
+                      name="UnitPriceDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[LineTotal]"
+                      dataType="numeric"
+                      name="LineTotal"
+                      precision="18"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[OnlineOrderFlag]"
+                      dataType="bool"
+                      name="OnlineOrderFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      dataType="i4"
+                      name="TerritoryID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[SalesOrderIDBK]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[SalesOrderIDBK]"
+                      name="SalesOrderIDBK" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[SalesOrderDetailIDBK]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[SalesOrderDetailIDBK]"
+                      name="SalesOrderDetailIDBK" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      name="TerritoryID" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[OnlineOrderFlag]"
+                      dataType="bool"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[OnlineOrderFlag]"
+                      name="OnlineOrderFlag" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[OrderQty]"
+                      dataType="i2"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[OrderQty]"
+                      name="OrderQty" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[LineTotal]"
+                      dataType="numeric"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[LineTotal]"
+                      name="LineTotal"
+                      precision="18"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup CustomerKey in DimCustomer"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT CustomerIDBK, CustomerKey 
+FROM DimCustomer</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT CustomerIDBK, CustomerKey 
+FROM DimCustomer) [refTable]
+where [refTable].[CustomerIDBK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerIDBK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[CustomerID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Inputs[Lookup Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[CustomerID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerIDBK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup ProductKey in DimProduct"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT ProductIDBK, ProductKey 
+FROM DimProduct</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT ProductIDBK, ProductKey 
+FROM DimProduct) [refTable]
+where [refTable].[ProductIDBK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProductIDBK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[ProductID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Inputs[Lookup Input].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[ProductID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProductIDBK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup TerritoryKey in DimTerrittory"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TerritoryKey, TerritoryIDBK 
+FROM DimTerritory</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT TerritoryKey, TerritoryIDBK 
+FROM DimTerritory) [refTable]
+where [refTable].[TerritoryIDBK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="TerritoryKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryIDBK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[TerritoryID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Connections[OleDbConnection]"
+                  connectionManagerID="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Inputs[Lookup Input].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      lineageId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output].Columns[TerritoryID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TerritoryIDBK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Match Output].Columns[TerritoryKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Match Output].Columns[TerritoryKey]"
+                      name="TerritoryKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritoryKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Data into FactSales.Paths[Derived Column Output]"
+              endId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Derived Column Output1]"
+              endId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Derived Column Output2]"
+              endId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Derived Column Output3]"
+              endId="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Lookup Match Output]"
+              endId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Lookup Match Output1]"
+              endId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Lookup Match Output2]"
+              endId="Package\Load Data into FactSales\Insert Data into FactSales.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Lookup No Match Output]"
+              endId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Data into FactSales\Lookup ProductKey in DimProduct.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Lookup No Match Output1]"
+              endId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[Lookup No Match Output2]"
+              endId="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Data into FactSales.Paths[OLE DB Source Output]"
+              endId="Package\Load Data into FactSales\Add DateKey, ChannelKey.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate FactSales"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CFF70241-17AD-495A-A259-53DF89401DD8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate FactSales"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{63A0D27F-683F-4473-ACB9-CE2A114F6F8C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE FactSales" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E4226E08-403E-4B14-9949-93F3D82E9553}"
+      DTS:From="Package\Truncate FactSales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Data into FactSales" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\Load Data into FactSales"
+          TopLeft="192.642857477373,174.676470466242" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Truncate FactSales"
+          TopLeft="209.071429004779,70.499999943025" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="291.257143241076,112.099999943025">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62.5764705232167"
+              Start="0,0"
+              End="0,55.0764705232167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.0764705232167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Package: s3_LoadFactSales&#xA;Purpose: Load FactSales by resolving all surrogate keys from the 4 dimensions.&#xA;Run order: 1) Truncate FactSales -&gt; 2) Data Flow Task&#xA;Grain: One row per order line item (BusinessKey = SalesOrderDetailID).&#xA;Dependency: All S3 dimension packages (DimProduct, DimCustomer, DimTerritory) must complete first.&#xA;Note: Facts are immutable — no SCD check needed. Re-run = full TRUNCATE + reload."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="560,136"
+          Id="a1b2c3d4-1001-1002-1003-400000000001"
+          TopLeft="30,295" />
+        <AnnotationLayout
+          Text="Clears FactSales before each full reload.&#xA;Re-run strategy: TRUNCATE + reload (facts are immutable historical records)."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="360,72"
+          Id="a1b2c3d4-1001-1002-1003-400000000002"
+          TopLeft="392,56" />
+        <AnnotationLayout
+          Text="Data Flow: 3 dimension Lookups resolve surrogate keys.&#xA;DateKey + ChannelKey are derived inline without a Lookup."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="360,56"
+          Id="a1b2c3d4-1001-1002-1003-400000000003"
+          TopLeft="392,165" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Data into FactSales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="364.8,41.6"
+          Id="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail"
+          TopLeft="36.2142857796688,13.9117646985091" />
+        <NodeLayout
+          Size="238.4,41.6"
+          Id="Package\Load Data into FactSales\Lookup ProductKey in DimProduct"
+          TopLeft="89.2857144757801,166.705882206817" />
+        <NodeLayout
+          Size="307.2,41.6"
+          Id="Package\Load Data into FactSales\Add Columns to stg_error_lookup for TerritoryID"
+          TopLeft="230.895692101494,556.638468368789" />
+        <NodeLayout
+          Size="312,41.6"
+          Id="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID"
+          TopLeft="369.682540469497,411.832679493979" />
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\Load Data into FactSales\Insert Data into FactSales"
+          TopLeft="18.2777777411163,556.344630800793" />
+        <NodeLayout
+          Size="302.4,41.6"
+          Id="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID"
+          TopLeft="423.492064393568,252.405228610556" />
+        <NodeLayout
+          Size="251.2,41.6"
+          Id="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory"
+          TopLeft="36.928571240026,345.565359284229" />
+        <NodeLayout
+          Size="303.2,41.6"
+          Id="Package\Load Data into FactSales\Add Columns to stg_error_lookup for ProductID"
+          TopLeft="424.146032260646,173.980392077992" />
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Load Data into FactSales\Add DateKey, ChannelKey"
+          TopLeft="115.000000244805,97.8823528553787" />
+        <NodeLayout
+          Size="256.8,41.6"
+          Id="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer"
+          TopLeft="80.4999999680689,251.49999986326" />
+        <NodeLayout
+          Size="307.2,41.6"
+          Id="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID"
+          TopLeft="224.115646735587,638.025022919299" />
+        <NodeLayout
+          Size="312,41.6"
+          Id="Package\Load Data into FactSales\Add Columns to stg_error_lookup for CustomerID"
+          TopLeft="373.253969048528,344.623529226094" />
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Derived Column Output]"
+          TopLeft="211.942857360292,139.482352855379">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.2235293514379"
+              Start="0,0"
+              End="0,19.7235293514379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.7235293514379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[OLE DB Source Output]"
+          TopLeft="217.007143012237,55.5117646985091">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.3705881568697"
+              Start="0,0"
+              End="0,34.8705881568697">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.8705881568697" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Lookup No Match Output2]"
+          TopLeft="203.061904573359,387.165359284229">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="181.433787528134,169.47310908456"
+              Start="0,0"
+              End="181.433787528134,161.97310908456">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.4328124024996" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,64.4328124024996"
+                    Point2="0,68.4328124024996"
+                    Point3="4,68.4328124024996" />
+                  <mssgle:LineSegment
+                    End="177.433787528134,68.4328124024996" />
+                  <mssgle:CubicBezierSegment
+                    Point1="177.433787528134,68.4328124024996"
+                    Point2="181.433787528134,68.4328124024996"
+                    Point3="181.433787528134,72.4328124024996" />
+                  <mssgle:LineSegment
+                    End="181.433787528134,161.97310908456" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="34.9105070453172,73.4328124024996,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Lookup No Match Output1]"
+          TopLeft="250.366666634736,293.09999986326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="278.887302413793,51.5235293628335"
+              Start="0,0"
+              End="278.887302413793,44.0235293628335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.8008304300727" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.8008304300727"
+                    Point2="0,20.8008304300727"
+                    Point3="4,20.8008304300727" />
+                  <mssgle:LineSegment
+                    End="274.887302413793,20.8008304300727" />
+                  <mssgle:CubicBezierSegment
+                    Point1="274.887302413793,20.8008304300727"
+                    Point2="278.887302413793,20.8008304300727"
+                    Point3="278.887302413793,24.8008304300727" />
+                  <mssgle:LineSegment
+                    End="278.887302413793,44.0235293628335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="83.6372644881463,25.8008304300727,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Lookup No Match Output]"
+          TopLeft="327.68571447578,191.143137142404">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.4603177848658,0"
+              Start="0,0"
+              End="88.9603177848658,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88.9603177848658,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-11.3262278263171,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Lookup Match Output2]"
+          TopLeft="120.136507823904,387.165359284229">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,169.179271516564"
+              Start="0,0"
+              End="0,161.679271516564">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,161.679271516564" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,75.0349482582821,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Lookup Match Output1]"
+          TopLeft="164.980952270714,293.09999986326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.4653594209685"
+              Start="0,0"
+              End="0,44.9653594209685">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.9653594209685" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,16.6779922104843,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Lookup Match Output]"
+          TopLeft="208.692857221924,208.305882206817">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.1941176564434"
+              Start="0,0"
+              End="0,35.6941176564434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.6941176564434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.0423713282217,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Derived Column Output3]"
+          TopLeft="381.10566941854,598.238468368789">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.7865545505103"
+              Start="0,0"
+              End="0,32.2865545505103">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.2865545505103" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Derived Column Output2]"
+          TopLeft="527.468254759012,386.223529226094">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.6091502678854"
+              Start="0,0"
+              End="0,18.1091502678854">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.1091502678854" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Data into FactSales.Paths[Derived Column Output1]"
+          TopLeft="575.219048327107,215.580392077992">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.8248365325642"
+              Start="0,0"
+              End="0,29.3248365325642">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3248365325642" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Source: stg_SalesOrderHeader INNER JOIN stg_SalesOrderDetail (on SalesOrderID)&#xA;One row per line item: SalesOrderID, SalesOrderDetailID, OrderDate, CustomerID,&#xA;TerritoryID, OnlineOrderFlag, ProductID, OrderQty, UnitPrice, UnitPriceDiscount, LineTotal."
+          ParentId="Package\Load Data into FactSales"
+          FontInfo="{assembly:Null}"
+          Size="470.4,88"
+          Id="a1b2c3d4-1001-1002-1003-400000000004"
+          TopLeft="738.571428014916,14.1176470534612" />
+        <AnnotationLayout
+          Text="Derived Column: DateKey = YEAR(OrderDate)*10000 + MONTH(OrderDate)*100 + DAY(OrderDate).&#xA;ChannelKey = OnlineOrderFlag == TRUE ? 2 : 1  (1=Reseller, 2=Online; matches DimChannel rows)."
+          ParentId="Package\Load Data into FactSales"
+          FontInfo="{assembly:Null}"
+          Size="470.4,88"
+          Id="a1b2c3d4-1001-1002-1003-400000000005"
+          TopLeft="738.571428014916,98.1176470534612" />
+        <AnnotationLayout
+          Text="Lookup 1: DimProduct (SELECT ProductIDBK, ProductKey)&#xA;Resolves stg ProductID -&gt; DimProduct.ProductKey surrogate.&#xA;No Match: ProductID logged to stg_errors_Lookup."
+          ParentId="Package\Load Data into FactSales"
+          FontInfo="{assembly:Null}"
+          Size="470.4,72"
+          Id="a1b2c3d4-1001-1002-1003-400000000006"
+          TopLeft="738.571428014916,168.117647053461" />
+        <AnnotationLayout
+          Text="Lookup 2: DimCustomer (SELECT CustomerIDBK, CustomerKey)&#xA;Resolves stg CustomerID -&gt; DimCustomer.CustomerKey surrogate.&#xA;No Match: CustomerID logged to stg_errors_Lookup."
+          ParentId="Package\Load Data into FactSales"
+          FontInfo="{assembly:Null}"
+          Size="470.4,72"
+          Id="a1b2c3d4-1001-1002-1003-400000000007"
+          TopLeft="738.571428014916,252.117647053461" />
+        <AnnotationLayout
+          Text="Lookup 3: DimTerritory (SELECT TerritoryIDBK, TerritoryKey)&#xA;Resolves stg TerritoryID -&gt; DimTerritory.TerritoryKey surrogate.&#xA;No Match: TerritoryID logged to stg_errors_Lookup."
+          ParentId="Package\Load Data into FactSales"
+          FontInfo="{assembly:Null}"
+          Size="470.4,72"
+          Id="a1b2c3d4-1001-1002-1003-400000000008"
+          TopLeft="738.040815759157,346.369747963699" />
+        <AnnotationLayout
+          Text="INSERT into FactSales: Maps SalesOrderIDBK, SalesOrderDetailIDBK, DateKey,&#xA;ProductKey, CustomerKey, TerritoryKey, ChannelKey,&#xA;OrderQty, UnitPrice, UnitPriceDiscount, LineTotal."
+          ParentId="Package\Load Data into FactSales"
+          FontInfo="{assembly:Null}"
+          Size="470.4,72"
+          Id="a1b2c3d4-1001-1002-1003-400000000009"
+          TopLeft="738.571428014916,554.117647053461" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Insert Data into stg_error_lookup for CustomerID">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Lookup ProductKey in DimProduct">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Load Data from stg_SalesOrderHeader, stg_SalesOrderDetail">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Insert Data into FactSales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Insert Data into stg_error_lookup for ProductID">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Lookup TerritoryKey in DimTerrittory">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Lookup CustomerKey in DimCustomer">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Data into FactSales\Insert Data into stg_error_lookup for TerritoryID">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

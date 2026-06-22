@@ -25,5 +25,11 @@ CREATE TABLE DimChannel
 )
 GO
 
+-- Insert static data for DimChannel
+INSERT INTO DimChannel (ChannelName) VALUES ('Reseller');
+INSERT INTO DimChannel (ChannelName) VALUES ('Online');
+GO
+
+-- Verify: ChannelKey 1 = Reseller, 2 = Online
 SELECT * FROM DimChannel
 GO
