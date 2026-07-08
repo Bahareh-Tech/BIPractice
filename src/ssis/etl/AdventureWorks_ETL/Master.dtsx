@@ -1,0 +1,1062 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/27/2026 1:53:53 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAHAREH-LAPTOP"
+  DTS:CreatorName="BAHAREH-LAPTOP\Bahareh"
+  DTS:DTSID="{9D773191-58FD-475F-ABF3-297D7F023752}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Master"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{4D0CCD7F-DD19-47E7-9139-48B650C12478}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ETL End Logging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C5C13995-A316-4A2E-8434-064519235F6C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL End Logging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO etl_log (PackageName, TableName, RowsLoaded, LoadDate)&#xA;VALUES ('MASTER', 'ETL_COMPLETE', 0, GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL Start Logging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{10A17B20-AC54-44C4-A46A-48A2036F4CC5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL Start Logging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO etl_log (PackageName, TableName, RowsLoaded, LoadDate)&#xA;VALUES ('MASTER', 'ETL_START', 0, GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\s3_LoadFactSales"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{32C75C46-FA4E-4EAA-BA42-9A3F276F57F1}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="s3_LoadFactSales"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>s3_LoadFactSales.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage 1 - Load Staging Tables"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{9752561A-D11A-40F4-914B-D8ABCFCC3874}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage 1 - Load Staging Tables">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_CountryRegion"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{df93c6ff-2cdb-4dcf-a3a5-2605dd6dbbed}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_CountryRegion"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_CountryRegion.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Customer"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{8382f987-ab89-4432-b770-24c514c8e0c1}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_Customer"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_Customer.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{daca6bc8-7a78-45e0-b1ee-259af7c02e59}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_Person"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_Person.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderDetail"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{4cabfb74-8ef4-400f-9af9-4396c94c9f05}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_Person_SalesOrderDetail"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_Person_SalesOrderDetail.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderHeader"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{be6dc18d-475d-4763-8f14-3aed41916626}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_Person_SalesOrderHeader"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_Person_SalesOrderHeader.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Product"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{2c24c016-2b45-405f-8808-82664a1456bf}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_Product"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_Product.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductCategory"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{3e447c22-ad82-422f-825a-4b26599e502b}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_ProductCategory"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_ProductCategory.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductSubCategory"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{5929b11e-811c-471a-8033-9baac3f6c3af}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_ProductSubCategory"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_ProductSubCategory.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_SalesTerritory"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{58a993b4-80a6-45ad-a3d5-64824f32d52b}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_SalesTerritory"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_SalesTerritory.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Store"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{d5efb27f-5a6c-411b-a378-ba69b5532b09}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S1_LoadStaging_Store"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S1_LoadStaging_Store.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{210f7b82-2259-41e3-8773-b28a330b506a}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_SalesTerritory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_CountryRegion" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 1 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{0082fd07-3a28-4ec6-9a16-c4ea40aae789}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductSubCategory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1 1"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductCategory" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{3012205b-2785-4d7b-8e41-21a36491d737}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Product"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductSubCategory" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 2 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{914ec5ac-9c8e-40be-8b95-bcad90050d06}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductCategory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2 1"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Customer" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{7cd6df10-a410-45b8-b6b7-0083750e8cf2}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Customer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{5612f60f-ef63-4445-a038-4aecb21269b4}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Store" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{192209de-1a69-40a8-877f-b726dc2c64ce}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Store"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_SalesTerritory" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{ae7a1163-acd6-42be-b261-925d9a43ba55}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_CountryRegion"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderHeader" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{15651d8f-dd98-4660-af33-f6fdb45923ba}"
+          DTS:From="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderHeader"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderDetail" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage 2 - Clean Staging Tables"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{355FB6EF-2AF5-4311-86C2-08232D2D2672}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage 2 - Clean Staging Tables">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Person"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{021B3354-84BE-4DE5-A73A-CF62C956B0D9}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S2_CleanStaging_Person"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S2_CleanStaging_Person.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Product"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{A98B621C-2DD4-41BA-8572-082C42CD8F7C}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S2_CleanStaging_Product"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S2_CleanStaging_Product.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_SalesOrder"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{D746A7C7-75BA-4D65-A963-6B9C03B57B17}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="S2_CleanStaging_SalesOrder"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>S2_CleanStaging_SalesOrder.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 2 - Clean Staging Tables.PrecedenceConstraints[Constraint 10]"
+          DTS:CreationName=""
+          DTS:DTSID="{0E78F860-37D0-4873-A157-5CC4790FA168}"
+          DTS:From="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Person"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 10"
+          DTS:To="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_SalesOrder" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Stage 2 - Clean Staging Tables.PrecedenceConstraints[Constraint 9]"
+          DTS:CreationName=""
+          DTS:DTSID="{C91E1EF3-923A-4DC0-B601-D56C9B351477}"
+          DTS:From="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Product"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 9"
+          DTS:To="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Person" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage 3 - Load Dimension Tables"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{662F74EC-D373-476B-8F21-0025003659A1}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage 3 - Load Dimension Tables">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Stage 3 - Load Dimension Tables\s3_LoadDimCustomer"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{723CF892-C882-45E5-BE22-B2E2904CE5F1}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="s3_LoadDimCustomer"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>s3_LoadDimCustomer.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 3 - Load Dimension Tables\s3_LoadDimProduct"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{5DAE9123-50E2-4928-AB5C-98AA3CA85A81}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="s3_LoadDimProduct"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>s3_LoadDimProduct.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Stage 3 - Load Dimension Tables\s3_LoadDimTerritory"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{2B38F9F3-7739-437F-8CA6-3297F5085553}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="s3_LoadDimTerritory"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>s3_LoadDimTerritory.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4C159EEA-8C8A-452A-8165-D1A6FDD375F8}"
+      DTS:From="Package\Stage 1 - Load Staging Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage 2 - Clean Staging Tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{4E172E25-B0BD-4CE4-A3E0-731C45943E18}"
+      DTS:From="Package\Stage 3 - Load Dimension Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\s3_LoadFactSales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{A7543A21-ADAA-41E9-9AD7-D5CD05B18AF8}"
+      DTS:From="Package\Stage 2 - Clean Staging Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Stage 3 - Load Dimension Tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{9EBC923F-7238-4F44-A46A-A8706D996837}"
+      DTS:From="Package\ETL Start Logging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Stage 1 - Load Staging Tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{1453EACF-4091-4498-AFA8-021161F3F3B3}"
+      DTS:From="Package\s3_LoadFactSales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\ETL End Logging" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{DD2D0C43-D005-41CF-A465-E27CBCE6221E}"
+      DTS:EventID="-378283704"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{ECBA329B-4454-48E2-A64B-DD66CDCC7C0F}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{0E39F54A-1EBF-4BE6-9E74-6FB91DF2F42D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+              SQLTask:SqlStatementSource="INSERT INTO AdventureWorks_Staging.dbo.etl_log&#xA;    (PackageName, TableName, RowsLoaded, LoadDate)&#xA;VALUES&#xA;    (?, 'MASTER_ERROR', -1, GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\s3_LoadFactSales"
+          TopLeft="628.692858475219,673.194117109483" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_SalesOrder"
+          TopLeft="15.5000000212873,153.476470466242" />
+        <EdgeLayout
+          Id="Package\Stage 2 - Clean Staging Tables.PrecedenceConstraints[Constraint 10]"
+          TopLeft="122.9,128.064705756338">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.4117647099043"
+              Start="0,0"
+              End="0,17.9117647099043">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.9117647099043" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Person"
+          TopLeft="25.4999999787125,86.4647057563379" />
+        <EdgeLayout
+          Id="Package\Stage 2 - Clean Staging Tables.PrecedenceConstraints[Constraint 9]"
+          TopLeft="122.314285657266,59.4176470192763">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.0470587370617"
+              Start="0,0"
+              End="0,19.5470587370617">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5470587370617" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Stage 2 - Clean Staging Tables\S2_CleanStaging_Product"
+          TopLeft="21.9285713358192,17.8176470192762" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="247.2,250.4"
+          Size="247.2,293.6"
+          Id="Package\Stage 2 - Clean Staging Tables"
+          TopLeft="588.021429773786,31.5176472927562" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\Stage 3 - Load Dimension Tables\s3_LoadDimTerritory"
+          TopLeft="34.7857143480559,153.49999981768" />
+        <NodeLayout
+          Size="172,41.6"
+          Id="Package\Stage 3 - Load Dimension Tables\s3_LoadDimProduct"
+          TopLeft="40.8571428685466,86.7647057848251" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Stage 3 - Load Dimension Tables\s3_LoadDimCustomer"
+          TopLeft="35.4999999361379,20.0294117519703" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="257.6,250.4"
+          Size="257.6,293.6"
+          Id="Package\Stage 3 - Load Dimension Tables"
+          TopLeft="582.307143754635,354.411764487701" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="710.300001114927,648.011764487701">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.1823526217817"
+              Start="0,0"
+              End="0,17.6823526217817">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.6823526217817" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="255.2,44.8"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductSubCategory"
+          TopLeft="4.12857119745149,72.0470589421714" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 2]"
+          TopLeft="129.335714310804,48.794117633653">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.2529413085184"
+              Start="0,0"
+              End="0,15.7529413085184">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.7529413085184" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 1 1]"
+          TopLeft="133.507142868547,116.847058942171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24.9352938676274"
+              Start="0,0"
+              End="0,17.4352938676274">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4352938676274" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204.8,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Customer"
+          TopLeft="31.985714177757,207.223529385623" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 2 1]"
+          TopLeft="134.835714358699,183.382352809799">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.8411765758241"
+              Start="0,0"
+              End="0,16.3411765758241">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3411765758241" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 3]"
+          TopLeft="133.842857072913,248.823529385623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.9882352103308"
+              Start="0,0"
+              End="0,16.4882352103308">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4882352103308" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person"
+          TopLeft="37.6999999680693,272.811764595954" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 4]"
+          TopLeft="136.342857152741,314.411764595954">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.9882352103315"
+              Start="0,0"
+              End="0,16.4882352103315">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4882352103315" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Store"
+          TopLeft="46.9857143374129,338.399999806285" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 5]"
+          TopLeft="141.171428637573,379.999999806285">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.282352855379"
+              Start="0,0"
+              End="0,18.782352855379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.782352855379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="224.8,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_SalesTerritory"
+          TopLeft="30.5571429377317,406.282352661664" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint]"
+          TopLeft="144.957142746146,447.882352661664">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24.0588235609158"
+              Start="0,0"
+              End="0,16.5588235609158">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5588235609158" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="237.6,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_ProductCategory"
+          TopLeft="16.4857145396424,141.782352809799" />
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Product"
+          TopLeft="29.3428574241548,7.19411763365297" />
+        <NodeLayout
+          Size="228.8,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_CountryRegion"
+          TopLeft="32.5571425545586,471.94117622258" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 7]"
+          TopLeft="150.39999977116,513.54117622258">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24.9647059386568"
+              Start="0,0"
+              End="0,17.4647059386568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4647059386568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="282.4,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderHeader"
+          TopLeft="12.6428569877634,538.505882161237" />
+        <EdgeLayout
+          Id="Package\Stage 1 - Load Staging Tables.PrecedenceConstraints[Constraint 8]"
+          TopLeft="155.142857014372,580.105882161237">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24.4235292146982"
+              Start="0,0"
+              End="0,16.9235292146982">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.9235292146982" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="275.2,41.6"
+          Id="Package\Stage 1 - Load Staging Tables\S1_LoadStaging_Person_SalesOrderDetail"
+          TopLeft="18.8428570409817,604.529411375936" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="300,692.8"
+          Size="300,736"
+          Id="Package\Stage 1 - Load Staging Tables"
+          TopLeft="241.485714699297,25.241176456177" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="541.485714699297,393.241176456177">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.5357150744882,-214.923529163421"
+              Start="0,0"
+              End="39.0357150744882,-214.923529163421">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="19.2678575372441,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.2678575372441,0"
+                    Point2="23.2678575372441,0"
+                    Point3="23.2678575372441,-4" />
+                  <mssgle:LineSegment
+                    End="23.2678575372441,-210.923529163421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.2678575372441,-210.923529163421"
+                    Point2="23.2678575372441,-214.923529163421"
+                    Point3="27.2678575372441,-214.923529163421" />
+                  <mssgle:LineSegment
+                    End="39.0357150744882,-214.923529163421" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="711.36428676421,325.117647292756">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.2941171949449"
+              Start="0,0"
+              End="0,21.7941171949449">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.7941171949449" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\ETL Start Logging"
+          TopLeft="47.4642858036167,28.3351063687349" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="209.864285803617,49.1351063687349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31.6214288956808,344.106070087442"
+              Start="0,0"
+              End="24.1214288956808,344.106070087442">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="11.8107144478404,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.8107144478404,0"
+                    Point2="15.8107144478404,0"
+                    Point3="15.8107144478404,4" />
+                  <mssgle:LineSegment
+                    End="15.8107144478404,340.106070087442" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.8107144478404,340.106070087442"
+                    Point2="15.8107144478404,344.106070087442"
+                    Point3="19.8107144478404,344.106070087442" />
+                  <mssgle:LineSegment
+                    End="24.1214288956808,344.106070087442" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\ETL End Logging"
+          TopLeft="864.464287080859,666.367646657484" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="790.292858475219,690.580881883484">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74.1714286056405,0"
+              Start="0,0"
+              End="66.6714286056405,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="66.6714286056405,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="331.999995052815,117.999998241663" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

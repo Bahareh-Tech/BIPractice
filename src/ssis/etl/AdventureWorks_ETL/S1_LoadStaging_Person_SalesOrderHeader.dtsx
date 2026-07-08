@@ -1,0 +1,926 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/20/2026 11:05:20 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAHAREH-LAPTOP"
+  DTS:CreatorName="BAHAREH-LAPTOP\Bahareh"
+  DTS:DTSID="{53E67F87-18BD-4EB7-AD09-FF65A6927274}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="S1_LoadStaging_Person_SalesOrderHeader"
+  DTS:PackageType="5"
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{65651050-C763-4886-9691-91748A4AB2C0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{77111E50-F919-4BBA-88BA-3B8276DA6B8B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A8A6C9A7-BB00-4A95-9704-FB3C7B281580}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">stg_SalesOrderHeader</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get data from AdventureWorks_DB"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C201EE20-75A6-4C6C-AD9C-71E36E2A0BDE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get data from AdventureWorks_DB"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get data from SalesOrderHeader"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    SalesOrderID,
+    OrderDate,
+    DueDate,
+    ShipDate,
+    OnlineOrderFlag,
+    CustomerID,
+    TerritoryID
+FROM Sales.SalesOrderHeader</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Connections[OleDbConnection]"
+                  connectionManagerID="{CB1B0E65-D03D-42E9-92EC-7C31F6B7C4DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_DB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[SalesOrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                      name="OrderDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[DueDate]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[DueDate]"
+                      name="DueDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[ShipDate]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[ShipDate]"
+                      name="ShipDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[OnlineOrderFlag]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]"
+                      name="OnlineOrderFlag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      name="TerritoryID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      name="ShipDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[OnlineOrderFlag]"
+                      dataType="bool"
+                      name="OnlineOrderFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      dataType="i4"
+                      name="TerritoryID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[SalesOrderID]"
+                      name="SalesOrderID" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[DueDate]"
+                      name="DueDate" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[ShipDate]"
+                      name="ShipDate" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[OnlineOrderFlag]"
+                      dataType="bool"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[OnlineOrderFlag]"
+                      name="OnlineOrderFlag" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      name="TerritoryID" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load data into stg_SalesOrderHeader"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_SalesOrderHeader]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Connections[OleDbConnection]"
+                  connectionManagerID="{8650C148-2D74-4165-AF52-A8C698DCAE4F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AdventureWorks_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[SalesOrderID]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[OrderDate]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[DueDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DueDate"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[DueDate]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[ShipDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ShipDate"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[ShipDate]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[ShipDate]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[OnlineOrderFlag]"
+                      cachedDataType="bool"
+                      cachedName="OnlineOrderFlag"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[OnlineOrderFlag]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryID]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[TerritoryID]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].Columns[RowHash]"
+                      cachedDataType="bytes"
+                      cachedLength="64"
+                      cachedName="RowHash"
+                      externalMetadataColumnId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[RowHash]"
+                      lineageId="Package\Get data from AdventureWorks_DB\Multiple Hash.Outputs[HashedOutput].Columns[RowHash]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      name="ShipDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[OnlineOrderFlag]"
+                      dataType="bool"
+                      name="OnlineOrderFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryID]"
+                      dataType="i4"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[RowHash]"
+                      dataType="wstr"
+                      length="64"
+                      name="RowHash" />
+                    <externalMetadataColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get data from AdventureWorks_DB\Multiple Hash"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="https://github.com/keif888/SSISMHash/"
+              description="Creates Multiple Hash's from selected input columns."
+              name="Multiple Hash">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Select the number of threads to use"
+                  name="MultipleThreads"
+                  typeConverter="Martin.SQLServer.Dts.MultipleHash+MultipleThread">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Select True to force Nulls and Empty Strings to be detected in Hash, False for earlier version compatability."
+                  name="SafeNullHandling"
+                  typeConverter="Martin.SQLServer.Dts.MultipleHash+SafeNullHandling">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Select True to enable hashing of Milliseconds, False for earlier version compatability."
+                  name="IncludeMillsecond"
+                  typeConverter="Martin.SQLServer.Dts.MultipleHash+MillisecondHandling">1</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">MultipleHash</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input]"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input].Columns[DueDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DueDate"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[DueDate]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input].Columns[ShipDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ShipDate"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[ShipDate]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input].Columns[OnlineOrderFlag]"
+                      cachedDataType="bool"
+                      cachedName="OnlineOrderFlag"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input].Columns[TerritoryID]"
+                      cachedDataType="i4"
+                      cachedName="TerritoryID"
+                      lineageId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[TerritoryID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Outputs[HashedOutput]"
+                  description="Hashed rows are directed to this output."
+                  name="HashedOutput"
+                  synchronousInputId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get data from AdventureWorks_DB\Multiple Hash.Outputs[HashedOutput].Columns[RowHash]"
+                      dataType="bytes"
+                      length="64"
+                      lineageId="Package\Get data from AdventureWorks_DB\Multiple Hash.Outputs[HashedOutput].Columns[RowHash]"
+                      name="RowHash">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Select the Hash Type that will be used for this output column."
+                          name="HashType"
+                          typeConverter="Martin.SQLServer.Dts.MultipleHash+HashTypeEnumerator, MultipleHash2022, Version=1.0.0.0, Culture=neutral, PublicKeyToken=51c551904274ab44">6</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Enter the Lineage ID's that will be used to calculate the hash for this output column."
+                          name="InputColumnLineageIDs">#{Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OrderDate]},#{Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[DueDate]},#{Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[ShipDate]},#{Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[OnlineOrderFlag]},#{Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[CustomerID]},#{Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output].Columns[TerritoryID]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Stores the type of the output column"
+                          name="HashOutputType"
+                          typeConverter="Martin.SQLServer.Dts.MultipleHash+OutputTypeEnumerator, MultipleHash2022, Version=1.0.0.0, Culture=neutral, PublicKeyToken=51c551904274ab44">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get data from AdventureWorks_DB\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get data from AdventureWorks_DB\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get data from AdventureWorks_DB\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Get data from AdventureWorks_DB\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get data from AdventureWorks_DB.Paths[HashedOutput]"
+              endId="Package\Get data from AdventureWorks_DB\Row Count.Inputs[Row Count Input 1]"
+              name="HashedOutput"
+              startId="Package\Get data from AdventureWorks_DB\Multiple Hash.Outputs[HashedOutput]" />
+            <path
+              refId="Package\Get data from AdventureWorks_DB.Paths[OLE DB Source Output]"
+              endId="Package\Get data from AdventureWorks_DB\Multiple Hash.Inputs[Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Get data from AdventureWorks_DB.Paths[Row Count Output 1]"
+              endId="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Get data from AdventureWorks_DB\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Row Counts in etl_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{88172AFE-4F09-4241-9058-23F68EC775D5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Row Counts in etl_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO etl_log (PackageName, TableName, RowsLoaded)&#xA;    VALUES(?, ?, ? )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stg_SalesOrderHeader"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C90321FA-79A4-4BD5-88EF-B0E4DCF58D0D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stg_SalesOrderHeader"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE stg_SalesOrderHeader" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1CFD44CC-2E2E-45BC-AE5D-E852E9DBD757}"
+      DTS:From="Package\Truncate stg_SalesOrderHeader"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get data from AdventureWorks_DB" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{45CB9237-BE7B-4646-8A22-155B02DFD8BE}"
+      DTS:From="Package\Get data from AdventureWorks_DB"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Log Row Counts in etl_log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="244,41.6"
+          Id="Package\Get data from AdventureWorks_DB"
+          TopLeft="107.642857360292,141.617646939512" />
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\Log Row Counts in etl_log"
+          TopLeft="135.500000212874,233.558823355805" />
+        <NodeLayout
+          Size="228,41.6"
+          Id="Package\Truncate stg_SalesOrderHeader"
+          TopLeft="116.214285822243,51.7352941297124" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="229.928571591267,93.3352941297124">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.2823528097991"
+              Start="0,0"
+              End="0,40.7823528097991">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.7823528097991" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="232.971428786583,183.217646939511">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.3411764162939"
+              Start="0,0"
+              End="0,42.8411764162939">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8411764162939" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Package: s1_LoadStaging_SalesOrderHeader&#xA;Purpose: Extract sales order header data from AdventureWorks into staging.&#xA;Run order: 1) Truncate → 2) Load → 3) Log&#xA;Note: Joined to stg_SalesOrderDetail via SalesOrderID to build FactSales."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="429.6,88"
+          Id="9f5e44be-e721-409f-b7b2-36fadb428f9b"
+          TopLeft="36.4285715061183,324.999999715125" />
+        <AnnotationLayout
+          Text="Clears stg_SalesOrderHeader before each load&#xA;to ensure a full fresh extract. &#xA;Prevents duplicate rows."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="273.6,72"
+          Id="505599f9-c291-4710-b4eb-6ff3f5fcdc34"
+          TopLeft="417.142858030844,32.8823529123538" />
+        <AnnotationLayout
+          Text="Writes row count to etl_log for reconciliation.&#xA;Compare against source count to verify completeness.&#xA;High row count expected (~31,000 rows)."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="315.2,72"
+          Id="8d436be7-02d8-4ab9-943a-f9cc5b6b4bdb"
+          TopLeft="417.857143746651,210.294117462728" />
+        <AnnotationLayout
+          Text="Extracts Sales.SalesOrderHeader. &#xA;Computes RowHash for change detection. &#xA;Loads raw copy into stg_SalesOrderHeader."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="257.6,72"
+          Id="c8a5ad3c-29be-44c5-b6ec-32cc548840ee"
+          TopLeft="418.571429462457,121.588235187541" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get data from AdventureWorks_DB">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Get data from AdventureWorks_DB\Row Count"
+          TopLeft="98.5714287812617,220.235293924602" />
+        <NodeLayout
+          Size="254.4,41.6"
+          Id="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader"
+          TopLeft="39.2857143693437,315.05882325325" />
+        <NodeLayout
+          Size="232,41.6"
+          Id="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader"
+          TopLeft="40.7142858009562,35.1764705574018" />
+        <EdgeLayout
+          Id="Package\Get data from AdventureWorks_DB.Paths[Row Count Output 1]"
+          TopLeft="164.928571575302,261.835293924602">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.2235293286481"
+              Start="0,0"
+              End="0,45.7235293286481">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.7235293286481" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Source: AdventureWorks2022.Sales.SalesOrderHeader&#xA;SalesOrderID, OrderDate, DueDate, ShipDate, OnlineOrderFlag,&#xD;&#xA;CustomerID, TerritoryID."
+          ParentId="Package\Get data from AdventureWorks_DB"
+          FontInfo="{assembly:Null}"
+          Size="361.6,72"
+          Id="9e13cacd-f225-493e-be0c-9cf14bbfef5d"
+          TopLeft="306.14285778604,22.1764705687968" />
+        <AnnotationLayout
+          Text="Destination: AdventureWorks_Staging.stg_SalesOrderHeader"
+          ParentId="Package\Get data from AdventureWorks_DB"
+          FontInfo="{assembly:Null}"
+          Size="348,40"
+          Id="f7bf4965-8143-4eb5-81f0-5173e2853e57"
+          TopLeft="311.771429228296,309.705882081472" />
+        <AnnotationLayout
+          Text="Captures row count into User::RowCount variable&#xA;for etl_log insert."
+          ParentId="Package\Get data from AdventureWorks_DB"
+          FontInfo="{assembly:Null}"
+          Size="288,56"
+          Id="60f8f825-6f33-4ffe-adb6-e493f3058203"
+          TopLeft="309.285714944102,217.117646973696" />
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\Get data from AdventureWorks_DB\Multiple Hash"
+          TopLeft="93.600000170299,125.411764595954" />
+        <EdgeLayout
+          Id="Package\Get data from AdventureWorks_DB.Paths[OLE DB Source Output]"
+          TopLeft="160.557142985628,76.7764705574018">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.6352940385523"
+              Start="0,0"
+              End="0,41.1352940385523">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.1352940385523" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Computes SHA512 hash of changeable attributes&#xD;&#xA;(OrderDate, DueDate, ShipDate, OnlineOrderFlag, CustomerID, TerritoryID).&#xD;&#xA;Detects order corrections or reassignments."
+          ParentId="Package\Get data from AdventureWorks_DB"
+          FontInfo="{assembly:Null}"
+          Size="423.2,72"
+          Id="97ae366a-0903-477d-822a-8f64c17be392"
+          TopLeft="305.742857764753,112.411764607349" />
+        <EdgeLayout
+          Id="Package\Get data from AdventureWorks_DB.Paths[HashedOutput]"
+          TopLeft="163.88571447578,167.011764595954">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.2235293286481"
+              Start="0,0"
+              End="0,45.7235293286481">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.7235293286481" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get data from AdventureWorks_DB\Load data into stg_SalesOrderHeader">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get data from AdventureWorks_DB\Get data from SalesOrderHeader">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

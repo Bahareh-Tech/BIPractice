@@ -7,7 +7,7 @@ Populate the fact table from staging and dimension keys.
 Create ETL logic that transforms sales transaction data into the warehouse fact table.
 
 ## Deliverables
-- Fact load script in `src/sql/06_etl/`
+- SSIS package in `src/ssis/etl/`
 - Joins to dimension keys handled correctly
 - Measures loaded accurately
 

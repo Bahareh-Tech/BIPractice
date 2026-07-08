@@ -1,0 +1,155 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2026 1:51:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAHAREH-LAPTOP"
+  DTS:CreatorName="BAHAREH-LAPTOP\Bahareh"
+  DTS:DTSID="{265DDEC8-0919-4771-986C-7F50687A3C19}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="S2_CleanStaging_Person"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{D36C0517-F55E-4A4A-B671-ACA640BF2ACB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2D62F5A6-28CE-415D-9C9E-53ABC1921CB0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StageTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">stg_Person</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Log valid and invalid row counts in stg_ETL_log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3236CAFB-8EF9-4FFA-9724-90D96BBB8472}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log valid and invalid row counts in stg_ETL_log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO stg_ETL_log (PackageName, StageTableName, ValidRows, ErrorRows, LoadDate)&#xA;SELECT&#xA;    ?,&#xA;    ?,&#xA;    (SELECT COUNT(*) FROM stg_Person),&#xA;    (SELECT COUNT(*) FROM stg_Person_Error),&#xA;    GETDATE();" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::StageTableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Remove invalid rows &amp; Fix formatting issues in stg_Person"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{796B3C06-E654-40B9-B52D-2B417D972E62}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Remove invalid rows &amp; Fix formatting issues in stg_Person"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8650C148-2D74-4165-AF52-A8C698DCAE4F}"
+          SQLTask:SqlStatementSource="INSERT INTO stg_SalesOrderHeader_Error (SalesOrderID, OrderDate, DueDate, ShipDate, OnlineOrderFlag, CustomerID, TerritoryID, ErrorReason, LoadDate)&#xA;SELECT&#xA;    SalesOrderID,&#xA;    OrderDate,&#xA;    DueDate,&#xA;    ShipDate,&#xA;    OnlineOrderFlag,&#xA;    CustomerID,&#xA;    TerritoryID,&#xA;    'Invalid data', &#xA;    GETDATE()&#xA;FROM stg_SalesOrderHeader&#xA;WHERE SalesOrderID IS NULL&#xA;    OR OrderDate IS NULL&#xA;    OR CustomerID IS NULL&#xA;    OR TerritoryID IS NULL&#xA;    OR OnlineOrderFlag IS NULL&#xA;    OR ShipDate &lt; OrderDate&#xA;    OR OrderDate &lt; '2000-01-01'&#xA;    OR OrderDate &gt; GETDATE();&#xA;&#xA;&#xA;DELETE FROM stg_SalesOrderHeader&#xA;WHERE SalesOrderID IS NULL&#xA;    OR OrderDate IS NULL&#xA;    OR CustomerID IS NULL&#xA;    OR TerritoryID IS NULL&#xA;    OR OnlineOrderFlag IS NULL&#xA;    OR ShipDate &lt; OrderDate&#xA;    OR OrderDate &lt; '2000-01-01'&#xA;    OR OrderDate &gt; GETDATE();&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1B4A9617-4389-4EFC-B7BC-5C3799CCD041}"
+      DTS:From="Package\Remove invalid rows &amp; Fix formatting issues in stg_Person"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Log valid and invalid row counts in stg_ETL_log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="302.4,41.6"
+          Id="Package\Log valid and invalid row counts in stg_ETL_log"
+          TopLeft="74.9000000745058,166.852941035039" />
+        <NodeLayout
+          Size="353.6,41.6"
+          Id="Package\Remove invalid rows &amp; Fix formatting issues in stg_Person"
+          TopLeft="42.0428570835568,53.8529411603835" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="222.471428579031,95.4529411603838">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71.399999874655"
+              Start="0,0"
+              End="0,63.899999874655">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.899999874655" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Stage 2 - Clean stg_Person&#xA;Reads from stg_Person (loaded by S1_LoadStaging_Person).&#xA;Removes rows that would break the warehouse load:&#xA;  - NULL BusinessEntityID (join key to stg_Customer.PersonID in Stage 3)&#xA;  - NULL, empty, or whitespace-only FirstName or LastName&#xA;    (combined into CustomerName NOT NULL in DimCustomer)&#xA;Rejected rows are copied to stg_Person_Error before deletion.&#xA;Trims FirstName and LastName for consistent name values in DimCustomer."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="428.8,152"
+          Id="8fb4738f-43b0-431c-9abf-95eeac554d2c"
+          TopLeft="12.9714285258128,268.411764470609" />
+        <AnnotationLayout
+          Text="Validates and cleans stg_Person.&#xA;1. Copies invalid rows to stg_Person_Error with reason&#xA;2. Deletes invalid rows from stg_Person&#xA;3. Trims FirstName and LastName"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="312.8,88"
+          Id="6ce1dd9d-2e63-4077-9c66-fa4ae88a6c71"
+          TopLeft="452.971429462459,31.3529411489885" />
+        <AnnotationLayout
+          Text="Logs final row counts to stg_ETL_log.&#xA;ValidRows = rows remaining in stg_Person after cleaning.&#xA;ErrorRows = rows in stg_Person_Error."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="329.6,72"
+          Id="ede8c683-13cd-432c-9b6f-b453e1c2c0a6"
+          TopLeft="455.800000670554,143.764705756338" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
